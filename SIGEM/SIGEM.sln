@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIGEM.Windows", "SIGEM.Application\SIGEM.Windows.csproj", "{2614BCB8-C969-45B1-88D7-C2E2C6895452}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Folder", "Solution Folder", "{A9363A10-3641-4A82-9A35-640590A67176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIGEM.Data", "SIGEM.Data\SIGEM.Data.csproj", "{F5DFCBB6-C690-4D18-A7DC-688FEFCFE967}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2614BCB8-C969-45B1-88D7-C2E2C6895452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2614BCB8-C969-45B1-88D7-C2E2C6895452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2614BCB8-C969-45B1-88D7-C2E2C6895452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2614BCB8-C969-45B1-88D7-C2E2C6895452}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5DFCBB6-C690-4D18-A7DC-688FEFCFE967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5DFCBB6-C690-4D18-A7DC-688FEFCFE967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5DFCBB6-C690-4D18-A7DC-688FEFCFE967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5DFCBB6-C690-4D18-A7DC-688FEFCFE967}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
