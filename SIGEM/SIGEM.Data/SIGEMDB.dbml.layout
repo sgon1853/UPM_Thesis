@@ -2,10 +2,10 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="SIGEMDB">
   <DataContextMoniker Name="/SIGEMDBDataContext" />
   <nestedChildShapes>
-    <classShape Id="f10c79ed-e99c-4483-a7f6-bd73ba7ae274" absoluteBounds="3, 1.25, 2, 1.1939925130208333">
+    <classShape Id="26687057-c94e-4b15-8a9b-f4e1c25d08ae" absoluteBounds="0.5, 0.5, 2, 1.1939925130208333">
       <DataClassMoniker Name="/SIGEMDBDataContext/SupplySpaceShip" />
       <nestedChildShapes>
-        <elementListCompartment Id="8e9b94dc-0637-4e36-82fe-8b10385e0ee3" absoluteBounds="3.015, 1.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="c1d85be1-d867-46dc-8ca1-598cf23a8705" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
