@@ -4,14 +4,14 @@ using System.Diagnostics;
 
 namespace SIGEM.Windows.Base
 {
-    public class ViewModelBase
+    public class ViewModelBase : INotifyPropertyChanged
     {
         // In ViewModelBase.cs
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            //this.VerifyPropertyName(propertyName);
+            this.VerifyPropertyName(propertyName);
 
             PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null)

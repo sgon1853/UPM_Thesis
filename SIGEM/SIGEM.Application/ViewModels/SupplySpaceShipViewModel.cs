@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using SIGEM.Data;
-using SIGEM.Data.DataRepository;
+using SIGEM.Data.Interfaces;
 using SIGEM.Windows.Base;
 using SIGEM.Windows.Commands;
 
@@ -12,8 +12,6 @@ namespace SIGEM.Windows.ViewModels
     /// </summary>
     public class SupplySpaceShipViewModel:ViewModelBase
     {
-        private readonly SupplySpaceShipDataRepository dataRepository = new SupplySpaceShipDataRepository();
-
         /// <summary>
         /// Id of the Supply space ship
         /// </summary>
@@ -32,10 +30,19 @@ namespace SIGEM.Windows.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="SupplySpaceShipViewModel"/> class.
         /// </summary>
-        public SupplySpaceShipViewModel()
+        public SupplySpaceShipViewModel(ISupplySpaceShipDataRepository supplySpaceShipRepository)
         {
-            SupplySpaceShips = this.dataRepository.GetSupplySpaceShips();
+            this.SupplySpaceShipRepository = supplySpaceShipRepository;
+            SupplySpaceShips = this.SupplySpaceShipRepository.GetSupplySpaceShips();
         }
+
+        /// <summary>
+        /// Gets or sets the supply space ship repository.
+        /// </summary>
+        /// <value>
+        /// The supply space ship repository.
+        /// </value>
+        protected ISupplySpaceShipDataRepository SupplySpaceShipRepository { get; set; }
 
         /// <summary>
         /// Gets the save supply space ship.
@@ -51,8 +58,8 @@ namespace SIGEM.Windows.ViewModels
                                                                     Id = this.Id,
                                                                     Name = this.Name
                                                                 };
-                                                dataRepository.SaveSupplySpaceShip(model);
-                                                this.SupplySpaceShips = dataRepository.GetSupplySpaceShips();
+                                                this.SupplySpaceShipRepository.SaveSupplySpaceShip(model);
+                                                this.SupplySpaceShips = this.SupplySpaceShipRepository.GetSupplySpaceShips();
                                             }
                                             , canexecute => true);
             }

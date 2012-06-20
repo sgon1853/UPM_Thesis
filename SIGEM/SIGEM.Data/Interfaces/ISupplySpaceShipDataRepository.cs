@@ -2,7 +2,7 @@
 
 namespace SIGEM.Data.Interfaces
 {
-    interface ISupplySpaceShipDataRepository
+    public interface ISupplySpaceShipDataRepository
     {
         void SaveSupplySpaceShip(SupplySpaceShip supplySpaceShip);
         IEnumerable<SupplySpaceShip> GetSupplySpaceShips();
