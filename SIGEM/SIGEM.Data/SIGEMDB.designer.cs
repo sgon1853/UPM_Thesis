@@ -72,6 +72,14 @@ namespace SIGEM.Data
 				return this.GetTable<SupplySpaceShip>();
 			}
 		}
+		
+		public System.Data.Linq.Table<SpaceShip> SpaceShips
+		{
+			get
+			{
+				return this.GetTable<SpaceShip>();
+			}
+		}
 	}
 	
 	[Table(Name="dbo.SupplySpaceShip")]
@@ -156,6 +164,105 @@ namespace SIGEM.Data
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.SpaceShip")]
+	public partial class SpaceShip
+	{
+		
+		private string _Id;
+		
+		private string _Name;
+		
+		private int _MaximumPassengers;
+		
+		private string _SupplySpaceShipOrigin;
+		
+		private string _SupplySpaceShipDestination;
+		
+		public SpaceShip()
+		{
+		}
+		
+		[Column(Storage="_Id", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_MaximumPassengers", DbType="Int NOT NULL")]
+		public int MaximumPassengers
+		{
+			get
+			{
+				return this._MaximumPassengers;
+			}
+			set
+			{
+				if ((this._MaximumPassengers != value))
+				{
+					this._MaximumPassengers = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_SupplySpaceShipOrigin", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string SupplySpaceShipOrigin
+		{
+			get
+			{
+				return this._SupplySpaceShipOrigin;
+			}
+			set
+			{
+				if ((this._SupplySpaceShipOrigin != value))
+				{
+					this._SupplySpaceShipOrigin = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_SupplySpaceShipDestination", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string SupplySpaceShipDestination
+		{
+			get
+			{
+				return this._SupplySpaceShipDestination;
+			}
+			set
+			{
+				if ((this._SupplySpaceShipDestination != value))
+				{
+					this._SupplySpaceShipDestination = value;
+				}
 			}
 		}
 	}

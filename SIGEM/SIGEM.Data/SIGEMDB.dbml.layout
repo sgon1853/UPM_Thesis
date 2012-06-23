@@ -8,5 +8,11 @@
         <elementListCompartment Id="c1d85be1-d867-46dc-8ca1-598cf23a8705" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="5e42007c-42f8-46b0-b6fe-9c507b3d6caa" absoluteBounds="2.75, 0.5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/SIGEMDBDataContext/SpaceShip" />
+      <nestedChildShapes>
+        <elementListCompartment Id="16590c45-868b-43c8-b6a5-111d59f156b5" absoluteBounds="2.765, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

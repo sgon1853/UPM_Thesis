@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using SIGEM.Data.Interfaces;
 
 namespace SIGEM.Data.DataRepository
@@ -9,12 +10,21 @@ namespace SIGEM.Data.DataRepository
 
         #region IDataRepository Members
 
+        /// <summary>
+        /// Saves the supply space ship.
+        /// </summary>
+        /// <param name="supplySpaceShip">The supply space ship.</param>
         public void SaveSupplySpaceShip(SupplySpaceShip supplySpaceShip)
         {
             dataContext.SupplySpaceShips.InsertOnSubmit(supplySpaceShip);
+            dataContext.SubmitChanges();
         }
 
-        public System.Collections.Generic.IEnumerable<SupplySpaceShip> GetSupplySpaceShips()
+        /// <summary>
+        /// Gets the supply space ships.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<SupplySpaceShip> GetSupplySpaceShips()
         {
             var supplySpaceShips = from sps in dataContext.SupplySpaceShips
                                    select sps;

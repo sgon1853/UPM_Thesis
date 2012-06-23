@@ -15,6 +15,7 @@ namespace SIGEM.Windows.Configure
         public void Startup()
         {
             UnityHelper.Container.RegisterType<ISupplySpaceShipDataRepository, SupplySpaceShipDataRepository>();
+            UnityHelper.Container.RegisterType<ISpaceShipDataRepository, SpaceShipDataRepository>();
         }
     }
 }

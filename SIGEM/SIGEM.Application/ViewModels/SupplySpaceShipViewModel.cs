@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 using SIGEM.Data;
 using SIGEM.Data.Interfaces;
@@ -53,13 +55,21 @@ namespace SIGEM.Windows.ViewModels
             {
                 return new RelayCommand(execute =>
                                             {
-                                                var model = new SupplySpaceShip()
-                                                                {
-                                                                    Id = this.Id,
-                                                                    Name = this.Name
-                                                                };
-                                                this.SupplySpaceShipRepository.SaveSupplySpaceShip(model);
-                                                this.SupplySpaceShips = this.SupplySpaceShipRepository.GetSupplySpaceShips();
+                                                try
+                                                {
+                                                    var model = new SupplySpaceShip()
+                                                    {
+                                                        Id = this.Id,
+                                                        Name = this.Name
+                                                    };
+                                                    this.SupplySpaceShipRepository.SaveSupplySpaceShip(model);
+                                                    this.SupplySpaceShips = this.SupplySpaceShipRepository.GetSupplySpaceShips();
+                                                }
+                                                catch (Exception exc)
+                                                {
+                                                    MessageBox.Show(exc.Message);
+                                                }
+                                                
                                             }
                                             , canexecute => true);
             }
