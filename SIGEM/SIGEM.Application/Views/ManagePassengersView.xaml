@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="SIGEM.Windows.Views.ManagePassengersView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="120"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Gestionar pasajeros</Label>
+        <Label Grid.Column="0" Grid.Row="1">Id Aeronave:</Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding IdSpaceship}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="2">Id Pasajero:</Label>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding IdPassenger}"></TextBox>
+        <StackPanel Margin="0,0,10,0" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Margin="3,0,3,0" Command="{Binding Path=SaveSpaceShipOcupationCommand}">Asignar pasajero</Button>
+            <Button Margin="0,0,3,0" Command="{Binding Path=SaveSpaceShipOcupationCommand}">Bajar pasajero</Button>
+        </StackPanel>        
+        <Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="90*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--<StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Label>Aeronave</Label>
+                <Label>Pasajero</Label>
+            </StackPanel>-->
+            <ListBox Grid.Row="1" ItemsSource="{Binding SpaceShipOcupations}">                
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Id_SpaceShip}"></Label>
+                            <Label Content="{Binding Id_Passenger}"></Label>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</UserControl>

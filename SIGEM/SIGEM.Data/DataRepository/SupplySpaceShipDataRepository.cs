@@ -4,10 +4,8 @@ using SIGEM.Data.Interfaces;
 
 namespace SIGEM.Data.DataRepository
 {
-    public class SupplySpaceShipDataRepository : ISupplySpaceShipDataRepository
+    public class SupplySpaceShipDataRepository : BaseDataRepository, ISupplySpaceShipDataRepository
     {
-        private readonly SIGEMDBDataContext dataContext = new SIGEMDBDataContext();
-
         #region IDataRepository Members
 
         /// <summary>
@@ -16,8 +14,8 @@ namespace SIGEM.Data.DataRepository
         /// <param name="supplySpaceShip">The supply space ship.</param>
         public void SaveSupplySpaceShip(SupplySpaceShip supplySpaceShip)
         {
-            dataContext.SupplySpaceShips.InsertOnSubmit(supplySpaceShip);
-            dataContext.SubmitChanges();
+            DataContext.SupplySpaceShips.InsertOnSubmit(supplySpaceShip);
+            DataContext.SubmitChanges();
         }
 
         /// <summary>
@@ -26,7 +24,7 @@ namespace SIGEM.Data.DataRepository
         /// <returns></returns>
         public IEnumerable<SupplySpaceShip> GetSupplySpaceShips()
         {
-            var supplySpaceShips = from sps in dataContext.SupplySpaceShips
+            var supplySpaceShips = from sps in DataContext.SupplySpaceShips
                                    select sps;
 
             return supplySpaceShips;

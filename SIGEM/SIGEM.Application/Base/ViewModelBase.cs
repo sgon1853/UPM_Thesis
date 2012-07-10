@@ -34,5 +34,14 @@ namespace SIGEM.Windows.Base
                 throw new Exception(msg);
             }
         }
+
+        /// <summary>
+        /// Arefieldses the valid.
+        /// </summary>
+        /// <returns>true if all fields are valid, otherwise returns false.</returns>
+        protected virtual bool ArefieldsValid()
+        {
+            return false;
+        }
     }
 }

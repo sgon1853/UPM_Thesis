@@ -42,6 +42,31 @@ namespace SIGEM.Windows.ViewModels
                                             });
             }
         }
+
+        /// <summary>
+        /// Gets the space ship command.
+        /// </summary>
+        public RelayCommand SpaceShipCommand
+        {
+            get
+            {
+                return new RelayCommand(execute =>
+                {
+                    Content = UserControlHelper.GetView("SpaceShip");
+                });
+            }
+        }
+
+        public RelayCommand ManagePassengersCommand
+        {
+            get
+            {
+                return new RelayCommand(execute =>
+                {
+                    Content = UserControlHelper.GetView("ManagePassengers");
+                });
+            }
+        }
     
     }
 }

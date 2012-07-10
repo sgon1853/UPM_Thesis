@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SIGEM.Data.Interfaces;
 
 namespace SIGEM.Data.DataRepository
 {
-    public class SpaceShipDataRepository : ISpaceShipDataRepository
+    public class SpaceShipDataRepository : BaseDataRepository, ISpaceShipDataRepository
     {
-        private readonly SIGEMDBDataContext dataContext = new SIGEMDBDataContext();
-
         /// <summary>
         /// Gets the space ships.
         /// </summary>
@@ -16,7 +15,7 @@ namespace SIGEM.Data.DataRepository
         /// </returns>
         public IEnumerable<SpaceShip> GetSpaceShips()
         {
-            var spaceships = from sps in dataContext.SpaceShips
+            var spaceships = from sps in DataContext.SpaceShips
                              select sps;
 
             return spaceships;
@@ -28,8 +27,15 @@ namespace SIGEM.Data.DataRepository
         /// <param name="spaceShip">The space ship.</param>
         public void SaveSpaceShip(SpaceShip spaceShip)
         {
-            dataContext.SpaceShips.InsertOnSubmit(spaceShip);
-            dataContext.SubmitChanges();
+            try
+            {
+                DataContext.SpaceShips.InsertOnSubmit(spaceShip);
+                DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

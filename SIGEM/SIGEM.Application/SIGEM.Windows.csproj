@@ -85,6 +85,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\ManagePassengersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PassengerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpaceShipView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SupplySpaceShipView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,9 +129,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\ManagePassengersViewModel.cs" />
+    <Compile Include="ViewModels\PassengerViewModel.cs" />
     <Compile Include="ViewModels\SpaceShipViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SupplySpaceShipViewModel.cs" />
+    <Compile Include="Views\ManagePassengersView.xaml.cs">
+      <DependentUpon>ManagePassengersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PassengerView.xaml.cs">
+      <DependentUpon>PassengerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpaceShipView.xaml.cs">
+      <DependentUpon>SpaceShipView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SupplySpaceShipView.xaml.cs">
       <DependentUpon>SupplySpaceShipView.xaml</DependentUpon>
     </Compile>

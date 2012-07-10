@@ -12,7 +12,7 @@ namespace SIGEM.Windows.ViewModels
     /// <summary>
     /// Spaceship View Model
     /// </summary>
-    public class SpaceShipViewModel:ViewModelBase
+    public class SpaceShipViewModel : ViewModelBase
     {
         /// <summary>
         /// Id of the space ship
@@ -75,13 +75,26 @@ namespace SIGEM.Windows.ViewModels
                                             {
                                                 try
                                                 {
-                                                    var model = new SpaceShip()
+                                                    if (this.ArefieldsValid())
                                                     {
-                                                        Id = this.Id,
-                                                        Name = this.Name
-                                                    };
-                                                    this.SpaceShipRepository.SaveSpaceShip(model);
-                                                    this.SpaceShips = this.SpaceShipRepository.GetSpaceShips();
+                                                        var model = new SpaceShip()
+                                                                        {
+                                                                            Id = this.Id,
+                                                                            Name = this.Name,
+                                                                            MaximumPassengers = this.MaximumPassengers,
+                                                                            SupplySpaceShipOrigin =
+                                                                                this.SupplySpaceShipOrigin,
+                                                                            SupplySpaceShipDestination =
+                                                                                this.SupplySpaceShipDestination
+
+                                                                        };
+                                                        this.SpaceShipRepository.SaveSpaceShip(model);
+                                                        this.SpaceShips = this.SpaceShipRepository.GetSpaceShips();
+                                                    }
+                                                    else
+                                                    {
+                                                        MessageBox.Show("Debe rellenar todos los campos.");
+                                                    }
                                                 }
                                                 catch (Exception exc)
                                                 {
@@ -91,6 +104,26 @@ namespace SIGEM.Windows.ViewModels
                                             }
                                             , canexecute => true);
             }
+        }
+
+        /// <summary>
+        /// Are the fields validated.
+        /// </summary>
+        /// <returns>
+        /// true if all fields are valid, otherwise returns false.
+        /// </returns>
+        protected override bool ArefieldsValid()
+        {
+            if (string.IsNullOrEmpty(this.Id) || 
+                string.IsNullOrEmpty(this.Name)||
+                this.MaximumPassengers == 0||
+                string.IsNullOrEmpty(this.SupplySpaceShipOrigin)||
+                string.IsNullOrEmpty(this.SupplySpaceShipDestination))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>

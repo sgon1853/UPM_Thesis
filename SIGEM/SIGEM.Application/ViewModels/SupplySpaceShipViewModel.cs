@@ -57,13 +57,21 @@ namespace SIGEM.Windows.ViewModels
                                             {
                                                 try
                                                 {
-                                                    var model = new SupplySpaceShip()
+                                                    if (ArefieldsValid())
                                                     {
-                                                        Id = this.Id,
-                                                        Name = this.Name
-                                                    };
-                                                    this.SupplySpaceShipRepository.SaveSupplySpaceShip(model);
-                                                    this.SupplySpaceShips = this.SupplySpaceShipRepository.GetSupplySpaceShips();
+                                                        var model = new SupplySpaceShip()
+                                                                        {
+                                                                            Id = this.Id,
+                                                                            Name = this.Name
+                                                                        };
+                                                        this.SupplySpaceShipRepository.SaveSupplySpaceShip(model);
+                                                        this.SupplySpaceShips =
+                                                            this.SupplySpaceShipRepository.GetSupplySpaceShips();
+                                                    }
+                                                    else
+                                                    {
+                                                        MessageBox.Show("Debe rellenar todos los campos.");
+                                                    }
                                                 }
                                                 catch (Exception exc)
                                                 {
@@ -73,6 +81,22 @@ namespace SIGEM.Windows.ViewModels
                                             }
                                             , canexecute => true);
             }
+        }
+
+        /// <summary>
+        /// Arefieldses the valid.
+        /// </summary>
+        /// <returns>
+        /// true if all fields are valid, otherwise returns false.
+        /// </returns>
+        protected override bool ArefieldsValid()
+        {
+            if (string.IsNullOrEmpty(this.Id) || string.IsNullOrEmpty(this.Name))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>

@@ -63,8 +63,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataRepository\BaseDataRepository.cs" />
+    <Compile Include="DataRepository\PassengerDataRepository.cs" />
     <Compile Include="DataRepository\SpaceShipDataRepository.cs" />
+    <Compile Include="DataRepository\SpaceShipOcupationDataRepository.cs" />
+    <Compile Include="Interfaces\IPassengerDataRepository.cs" />
     <Compile Include="Interfaces\ISpaceShipDataRepository.cs" />
+    <Compile Include="Interfaces\ISpaceShipOcupationDataRepository.cs" />
     <Compile Include="Interfaces\ISupplySpaceShipDataRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -81,9 +86,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SIGEMDB.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SIGEMDB_log.LDF">
       <DependentUpon>SIGEMDB.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>

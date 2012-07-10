@@ -33,6 +33,15 @@ namespace SIGEM.Data
     partial void InsertSupplySpaceShip(SupplySpaceShip instance);
     partial void UpdateSupplySpaceShip(SupplySpaceShip instance);
     partial void DeleteSupplySpaceShip(SupplySpaceShip instance);
+    partial void InsertSpaceShip(SpaceShip instance);
+    partial void UpdateSpaceShip(SpaceShip instance);
+    partial void DeleteSpaceShip(SpaceShip instance);
+    partial void InsertPassenger(Passenger instance);
+    partial void UpdatePassenger(Passenger instance);
+    partial void DeletePassenger(Passenger instance);
+    partial void InsertSpaceShipOcupation(SpaceShipOcupation instance);
+    partial void UpdateSpaceShipOcupation(SpaceShipOcupation instance);
+    partial void DeleteSpaceShipOcupation(SpaceShipOcupation instance);
     #endregion
 		
 		public SIGEMDBDataContext() : 
@@ -78,6 +87,22 @@ namespace SIGEM.Data
 			get
 			{
 				return this.GetTable<SpaceShip>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Passenger> Passengers
+		{
+			get
+			{
+				return this.GetTable<Passenger>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SpaceShipOcupation> SpaceShipOcupations
+		{
+			get
+			{
+				return this.GetTable<SpaceShipOcupation>();
 			}
 		}
 	}
@@ -169,8 +194,10 @@ namespace SIGEM.Data
 	}
 	
 	[Table(Name="dbo.SpaceShip")]
-	public partial class SpaceShip
+	public partial class SpaceShip : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private string _Id;
 		
@@ -182,11 +209,28 @@ namespace SIGEM.Data
 		
 		private string _SupplySpaceShipDestination;
 		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnMaximumPassengersChanging(int value);
+    partial void OnMaximumPassengersChanged();
+    partial void OnSupplySpaceShipOriginChanging(string value);
+    partial void OnSupplySpaceShipOriginChanged();
+    partial void OnSupplySpaceShipDestinationChanging(string value);
+    partial void OnSupplySpaceShipDestinationChanged();
+    #endregion
+		
 		public SpaceShip()
 		{
+			OnCreated();
 		}
 		
-		[Column(Storage="_Id", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_Id", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string Id
 		{
 			get
@@ -197,7 +241,11 @@ namespace SIGEM.Data
 			{
 				if ((this._Id != value))
 				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
 					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
 				}
 			}
 		}
@@ -213,7 +261,11 @@ namespace SIGEM.Data
 			{
 				if ((this._Name != value))
 				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
 					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
@@ -229,7 +281,11 @@ namespace SIGEM.Data
 			{
 				if ((this._MaximumPassengers != value))
 				{
+					this.OnMaximumPassengersChanging(value);
+					this.SendPropertyChanging();
 					this._MaximumPassengers = value;
+					this.SendPropertyChanged("MaximumPassengers");
+					this.OnMaximumPassengersChanged();
 				}
 			}
 		}
@@ -245,7 +301,11 @@ namespace SIGEM.Data
 			{
 				if ((this._SupplySpaceShipOrigin != value))
 				{
+					this.OnSupplySpaceShipOriginChanging(value);
+					this.SendPropertyChanging();
 					this._SupplySpaceShipOrigin = value;
+					this.SendPropertyChanged("SupplySpaceShipOrigin");
+					this.OnSupplySpaceShipOriginChanged();
 				}
 			}
 		}
@@ -261,8 +321,273 @@ namespace SIGEM.Data
 			{
 				if ((this._SupplySpaceShipDestination != value))
 				{
+					this.OnSupplySpaceShipDestinationChanging(value);
+					this.SendPropertyChanging();
 					this._SupplySpaceShipDestination = value;
+					this.SendPropertyChanged("SupplySpaceShipDestination");
+					this.OnSupplySpaceShipDestinationChanged();
 				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.Passenger")]
+	public partial class Passenger : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Id;
+		
+		private string _Name;
+		
+		private EntitySet<SpaceShipOcupation> _SpaceShipOcupations;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Passenger()
+		{
+			this._SpaceShipOcupations = new EntitySet<SpaceShipOcupation>(new Action<SpaceShipOcupation>(this.attach_SpaceShipOcupations), new Action<SpaceShipOcupation>(this.detach_SpaceShipOcupations));
+			OnCreated();
+		}
+		
+		[Column(Storage="_Id", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Passenger_SpaceShipOcupation", Storage="_SpaceShipOcupations", OtherKey="Id_Passenger")]
+		public EntitySet<SpaceShipOcupation> SpaceShipOcupations
+		{
+			get
+			{
+				return this._SpaceShipOcupations;
+			}
+			set
+			{
+				this._SpaceShipOcupations.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_SpaceShipOcupations(SpaceShipOcupation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Passenger = this;
+		}
+		
+		private void detach_SpaceShipOcupations(SpaceShipOcupation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Passenger = null;
+		}
+	}
+	
+	[Table(Name="dbo.SpaceShipOcupation")]
+	public partial class SpaceShipOcupation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Id_Passenger;
+		
+		private string _Id_SpaceShip;
+		
+		private EntityRef<Passenger> _Passenger;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_PassengerChanging(string value);
+    partial void OnId_PassengerChanged();
+    partial void OnId_SpaceShipChanging(string value);
+    partial void OnId_SpaceShipChanged();
+    #endregion
+		
+		public SpaceShipOcupation()
+		{
+			this._Passenger = default(EntityRef<Passenger>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_Id_Passenger", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Id_Passenger
+		{
+			get
+			{
+				return this._Id_Passenger;
+			}
+			set
+			{
+				if ((this._Id_Passenger != value))
+				{
+					if (this._Passenger.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_PassengerChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Passenger = value;
+					this.SendPropertyChanged("Id_Passenger");
+					this.OnId_PassengerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Id_SpaceShip", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Id_SpaceShip
+		{
+			get
+			{
+				return this._Id_SpaceShip;
+			}
+			set
+			{
+				if ((this._Id_SpaceShip != value))
+				{
+					this.OnId_SpaceShipChanging(value);
+					this.SendPropertyChanging();
+					this._Id_SpaceShip = value;
+					this.SendPropertyChanged("Id_SpaceShip");
+					this.OnId_SpaceShipChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Passenger_SpaceShipOcupation", Storage="_Passenger", ThisKey="Id_Passenger", IsForeignKey=true)]
+		public Passenger Passenger
+		{
+			get
+			{
+				return this._Passenger.Entity;
+			}
+			set
+			{
+				Passenger previousValue = this._Passenger.Entity;
+				if (((previousValue != value) 
+							|| (this._Passenger.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Passenger.Entity = null;
+						previousValue.SpaceShipOcupations.Remove(this);
+					}
+					this._Passenger.Entity = value;
+					if ((value != null))
+					{
+						value.SpaceShipOcupations.Add(this);
+						this._Id_Passenger = value.Id;
+					}
+					else
+					{
+						this._Id_Passenger = default(string);
+					}
+					this.SendPropertyChanged("Passenger");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

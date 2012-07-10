@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace SIGEM.Windows.Helpers
@@ -27,6 +28,21 @@ namespace SIGEM.Windows.Helpers
 
 
             return null;
+        }
+
+        /// <summary>
+        /// Shows the view.
+        /// </summary>
+        /// <param name="viewName">Name of the view.</param>
+        public static void ShowView(string viewName)
+        {
+            var view = GetView(viewName);
+
+            var window = new Window
+                                {
+                                    Content = view
+                                };
+            window.Show();
         }
     }
 }

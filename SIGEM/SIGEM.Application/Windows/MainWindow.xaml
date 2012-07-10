@@ -1,20 +1,20 @@
 ﻿<Window x:Class="SIGEM.Windows.Windows.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-        xmlns:ViewModels="clr-namespace:SIGEM.Windows.ViewModels"
         Title="SIGEM" Height="600" Width="800"
         WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="Funciones">
                 <MenuItem Header="Nave nodriza" Command="{Binding SupplySpaceShipCommand}"></MenuItem>
+                <MenuItem Header="Aeronave" Command="{Binding SpaceShipCommand}"></MenuItem>
+                <MenuItem Header="Gestionar pasajeros" Command="{Binding ManagePassengersCommand}"></MenuItem>
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Left">
             <ContentControl 
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                 
+                VerticalAlignment="Stretch"                 
                             Content="{Binding Content}"></ContentControl>
         </Grid>
     </DockPanel>
