@@ -23,11 +23,29 @@
       <Association Name="Passenger_SpaceShipOcupation" Member="SpaceShipOcupations" OtherKey="Id_Passenger" Type="SpaceShipOcupation" />
     </Type>
   </Table>
+  <Table Name="dbo.Inspection" Member="Inspections">
+    <Type Name="Inspection">
+      <Column Name="IdInspection" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="InspectorName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="IdSpaceShip" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="InspectionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.SpaceShipOcupation" Member="SpaceShipOcupations">
     <Type Name="SpaceShipOcupation">
       <Column Name="Id_Passenger" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Id_SpaceShip" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SpaceShipName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PassengerName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Association Name="Passenger_SpaceShipOcupation" Member="Passenger" ThisKey="Id_Passenger" Type="Passenger" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InspectionDetail" Member="InspectionDetails">
+    <Type Name="InspectionDetail">
+      <Column Name="IdInspection" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdPassenger" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PassengerName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="isPassengerPresent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

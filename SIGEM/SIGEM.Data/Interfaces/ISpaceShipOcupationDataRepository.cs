@@ -11,9 +11,23 @@ namespace SIGEM.Data.Interfaces
         void AssignPassengerToSpaceShip(SpaceShipOcupation spaceShipOcupation);
 
         /// <summary>
+        /// Removes the passenger from space ship.
+        /// </summary>
+        /// <param name="spaceShipOcupation">The space ship ocupation.</param>
+        void RemovePassengerFromSpaceShip(SpaceShipOcupation spaceShipOcupation);
+
+        /// <summary>
         /// Gets the space ship ocupations.
         /// </summary>
         /// <returns>A SpaceShipOcupation Object.</returns>
-        IEnumerable<SpaceShipOcupation> GetSpaceShipOcupations();
+        IEnumerable<SpaceShipOcupation> GetAllSpaceShipOcupations();
+
+        /// <summary>
+        /// Gets the space ship ocupations.
+        /// </summary>
+        /// <param name="idSpaceship">The id spaceship.</param>
+        /// <returns></returns>
+        IEnumerable<SpaceShipOcupation> GetSpaceShipOcupations(string idSpaceship);
+
     }
 }

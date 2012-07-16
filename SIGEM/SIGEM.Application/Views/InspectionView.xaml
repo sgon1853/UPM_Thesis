@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="SIGEM.Windows.Views.InspectionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="500" Width="300">
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="120"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Revisar aeronave</Label>
+        <Label Grid.Column="0" Grid.Row="1">Id Revision:</Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding IdInspection}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="2">Nombre  Revisor:</Label>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NameInspector}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="3">Id Aeronave:</Label>
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding IdSpaceship}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="4">Fecha revision:</Label>
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding DateInspection}"></TextBox>
+        <StackPanel Margin="0,0,10,0" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Margin="0,0,3,0" Command="{Binding Path=ShowSpaceShipOccupationCommand}">Mostrar Pasajeros</Button>
+            <Button Margin="0,0,3,0" Command="{Binding Path=SaveSpaceShipInspectionCommand}">Guardar Revision</Button>
+        </StackPanel>
+        <Grid Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <!--<RowDefinition Height="10*"></RowDefinition>-->
+                <RowDefinition Height="90*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--<StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Label>Aeronave</Label>
+                <Label>Pasajero</Label>
+            </StackPanel>-->
+            <ListBox Grid.Row="1" ItemsSource="{Binding InspectionDetail}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding isPassengerPresent}"></CheckBox>
+                            <Label Content="{Binding IdPassenger}"></Label>
+                            <Label Content="{Binding PassengerName}"></Label>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</UserControl>

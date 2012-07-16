@@ -53,6 +53,7 @@
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -64,9 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataRepository\BaseDataRepository.cs" />
+    <Compile Include="DataRepository\InspectionDataRepository.cs" />
     <Compile Include="DataRepository\PassengerDataRepository.cs" />
     <Compile Include="DataRepository\SpaceShipDataRepository.cs" />
     <Compile Include="DataRepository\SpaceShipOcupationDataRepository.cs" />
+    <Compile Include="Interfaces\IInspectionDataRepository.cs" />
     <Compile Include="Interfaces\IPassengerDataRepository.cs" />
     <Compile Include="Interfaces\ISpaceShipDataRepository.cs" />
     <Compile Include="Interfaces\ISpaceShipOcupationDataRepository.cs" />

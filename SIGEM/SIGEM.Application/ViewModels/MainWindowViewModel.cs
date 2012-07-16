@@ -10,7 +10,7 @@ namespace SIGEM.Windows.ViewModels
 
         public MainWindowViewModel()
         {
-            content = "SIGEM Software";
+            content = "SIGEM (SIstema de GEstión de Naves Marcianas)";
         }
 
         /// <summary>
@@ -57,6 +57,9 @@ namespace SIGEM.Windows.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets the manage passengers command.
+        /// </summary>
         public RelayCommand ManagePassengersCommand
         {
             get
@@ -64,6 +67,20 @@ namespace SIGEM.Windows.ViewModels
                 return new RelayCommand(execute =>
                 {
                     Content = UserControlHelper.GetView("ManagePassengers");
+                });
+            }
+        }
+
+        /// <summary>
+        /// Gets the inspection command.
+        /// </summary>
+        public RelayCommand InspectionCommand
+        {
+            get
+            {
+                return new RelayCommand(execute =>
+                {
+                    Content = UserControlHelper.GetView("Inspection");
                 });
             }
         }

@@ -9,6 +9,7 @@
                 <MenuItem Header="Nave nodriza" Command="{Binding SupplySpaceShipCommand}"></MenuItem>
                 <MenuItem Header="Aeronave" Command="{Binding SpaceShipCommand}"></MenuItem>
                 <MenuItem Header="Gestionar pasajeros" Command="{Binding ManagePassengersCommand}"></MenuItem>
+                <MenuItem Header="Revisar Aeronave" Command="{Binding InspectionCommand}"></MenuItem>
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Left">

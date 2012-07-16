@@ -39,9 +39,15 @@ namespace SIGEM.Data
     partial void InsertPassenger(Passenger instance);
     partial void UpdatePassenger(Passenger instance);
     partial void DeletePassenger(Passenger instance);
+    partial void InsertInspection(Inspection instance);
+    partial void UpdateInspection(Inspection instance);
+    partial void DeleteInspection(Inspection instance);
     partial void InsertSpaceShipOcupation(SpaceShipOcupation instance);
     partial void UpdateSpaceShipOcupation(SpaceShipOcupation instance);
     partial void DeleteSpaceShipOcupation(SpaceShipOcupation instance);
+    partial void InsertInspectionDetail(InspectionDetail instance);
+    partial void UpdateInspectionDetail(InspectionDetail instance);
+    partial void DeleteInspectionDetail(InspectionDetail instance);
     #endregion
 		
 		public SIGEMDBDataContext() : 
@@ -98,11 +104,27 @@ namespace SIGEM.Data
 			}
 		}
 		
+		public System.Data.Linq.Table<Inspection> Inspections
+		{
+			get
+			{
+				return this.GetTable<Inspection>();
+			}
+		}
+		
 		public System.Data.Linq.Table<SpaceShipOcupation> SpaceShipOcupations
 		{
 			get
 			{
 				return this.GetTable<SpaceShipOcupation>();
+			}
+		}
+		
+		public System.Data.Linq.Table<InspectionDetail> InspectionDetails
+		{
+			get
+			{
+				return this.GetTable<InspectionDetail>();
 			}
 		}
 	}
@@ -465,6 +487,140 @@ namespace SIGEM.Data
 		}
 	}
 	
+	[Table(Name="dbo.Inspection")]
+	public partial class Inspection : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _IdInspection;
+		
+		private string _InspectorName;
+		
+		private string _IdSpaceShip;
+		
+		private System.DateTime _InspectionDate;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdInspectionChanging(string value);
+    partial void OnIdInspectionChanged();
+    partial void OnInspectorNameChanging(string value);
+    partial void OnInspectorNameChanged();
+    partial void OnIdSpaceShipChanging(string value);
+    partial void OnIdSpaceShipChanged();
+    partial void OnInspectionDateChanging(System.DateTime value);
+    partial void OnInspectionDateChanged();
+    #endregion
+		
+		public Inspection()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_IdInspection", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IdInspection
+		{
+			get
+			{
+				return this._IdInspection;
+			}
+			set
+			{
+				if ((this._IdInspection != value))
+				{
+					this.OnIdInspectionChanging(value);
+					this.SendPropertyChanging();
+					this._IdInspection = value;
+					this.SendPropertyChanged("IdInspection");
+					this.OnIdInspectionChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InspectorName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string InspectorName
+		{
+			get
+			{
+				return this._InspectorName;
+			}
+			set
+			{
+				if ((this._InspectorName != value))
+				{
+					this.OnInspectorNameChanging(value);
+					this.SendPropertyChanging();
+					this._InspectorName = value;
+					this.SendPropertyChanged("InspectorName");
+					this.OnInspectorNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IdSpaceShip", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string IdSpaceShip
+		{
+			get
+			{
+				return this._IdSpaceShip;
+			}
+			set
+			{
+				if ((this._IdSpaceShip != value))
+				{
+					this.OnIdSpaceShipChanging(value);
+					this.SendPropertyChanging();
+					this._IdSpaceShip = value;
+					this.SendPropertyChanged("IdSpaceShip");
+					this.OnIdSpaceShipChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InspectionDate", DbType="DateTime NOT NULL")]
+		public System.DateTime InspectionDate
+		{
+			get
+			{
+				return this._InspectionDate;
+			}
+			set
+			{
+				if ((this._InspectionDate != value))
+				{
+					this.OnInspectionDateChanging(value);
+					this.SendPropertyChanging();
+					this._InspectionDate = value;
+					this.SendPropertyChanged("InspectionDate");
+					this.OnInspectionDateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[Table(Name="dbo.SpaceShipOcupation")]
 	public partial class SpaceShipOcupation : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -474,6 +630,10 @@ namespace SIGEM.Data
 		private string _Id_Passenger;
 		
 		private string _Id_SpaceShip;
+		
+		private string _SpaceShipName;
+		
+		private string _PassengerName;
 		
 		private EntityRef<Passenger> _Passenger;
 		
@@ -485,6 +645,10 @@ namespace SIGEM.Data
     partial void OnId_PassengerChanged();
     partial void OnId_SpaceShipChanging(string value);
     partial void OnId_SpaceShipChanged();
+    partial void OnSpaceShipNameChanging(string value);
+    partial void OnSpaceShipNameChanged();
+    partial void OnPassengerNameChanging(string value);
+    partial void OnPassengerNameChanged();
     #endregion
 		
 		public SpaceShipOcupation()
@@ -537,6 +701,46 @@ namespace SIGEM.Data
 			}
 		}
 		
+		[Column(Storage="_SpaceShipName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string SpaceShipName
+		{
+			get
+			{
+				return this._SpaceShipName;
+			}
+			set
+			{
+				if ((this._SpaceShipName != value))
+				{
+					this.OnSpaceShipNameChanging(value);
+					this.SendPropertyChanging();
+					this._SpaceShipName = value;
+					this.SendPropertyChanged("SpaceShipName");
+					this.OnSpaceShipNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PassengerName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string PassengerName
+		{
+			get
+			{
+				return this._PassengerName;
+			}
+			set
+			{
+				if ((this._PassengerName != value))
+				{
+					this.OnPassengerNameChanging(value);
+					this.SendPropertyChanging();
+					this._PassengerName = value;
+					this.SendPropertyChanged("PassengerName");
+					this.OnPassengerNameChanged();
+				}
+			}
+		}
+		
 		[Association(Name="Passenger_SpaceShipOcupation", Storage="_Passenger", ThisKey="Id_Passenger", IsForeignKey=true)]
 		public Passenger Passenger
 		{
@@ -567,6 +771,140 @@ namespace SIGEM.Data
 						this._Id_Passenger = default(string);
 					}
 					this.SendPropertyChanged("Passenger");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.InspectionDetail")]
+	public partial class InspectionDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _IdInspection;
+		
+		private string _IdPassenger;
+		
+		private string _PassengerName;
+		
+		private bool _isPassengerPresent;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdInspectionChanging(string value);
+    partial void OnIdInspectionChanged();
+    partial void OnIdPassengerChanging(string value);
+    partial void OnIdPassengerChanged();
+    partial void OnPassengerNameChanging(string value);
+    partial void OnPassengerNameChanged();
+    partial void OnisPassengerPresentChanging(bool value);
+    partial void OnisPassengerPresentChanged();
+    #endregion
+		
+		public InspectionDetail()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_IdInspection", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IdInspection
+		{
+			get
+			{
+				return this._IdInspection;
+			}
+			set
+			{
+				if ((this._IdInspection != value))
+				{
+					this.OnIdInspectionChanging(value);
+					this.SendPropertyChanging();
+					this._IdInspection = value;
+					this.SendPropertyChanged("IdInspection");
+					this.OnIdInspectionChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IdPassenger", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IdPassenger
+		{
+			get
+			{
+				return this._IdPassenger;
+			}
+			set
+			{
+				if ((this._IdPassenger != value))
+				{
+					this.OnIdPassengerChanging(value);
+					this.SendPropertyChanging();
+					this._IdPassenger = value;
+					this.SendPropertyChanged("IdPassenger");
+					this.OnIdPassengerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PassengerName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string PassengerName
+		{
+			get
+			{
+				return this._PassengerName;
+			}
+			set
+			{
+				if ((this._PassengerName != value))
+				{
+					this.OnPassengerNameChanging(value);
+					this.SendPropertyChanging();
+					this._PassengerName = value;
+					this.SendPropertyChanged("PassengerName");
+					this.OnPassengerNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_isPassengerPresent", DbType="Bit NOT NULL")]
+		public bool isPassengerPresent
+		{
+			get
+			{
+				return this._isPassengerPresent;
+			}
+			set
+			{
+				if ((this._isPassengerPresent != value))
+				{
+					this.OnisPassengerPresentChanging(value);
+					this.SendPropertyChanging();
+					this._isPassengerPresent = value;
+					this.SendPropertyChanged("isPassengerPresent");
+					this.OnisPassengerPresentChanged();
 				}
 			}
 		}

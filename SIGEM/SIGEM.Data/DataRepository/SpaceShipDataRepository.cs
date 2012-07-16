@@ -22,6 +22,20 @@ namespace SIGEM.Data.DataRepository
         }
 
         /// <summary>
+        /// Gets the space ships.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns></returns>
+        public SpaceShip GetSpaceShip(string id)
+        {
+            var spaceships = from sps in DataContext.SpaceShips
+                             where sps.Id == id
+                             select sps;
+
+            return spaceships.FirstOrDefault();
+        }
+
+        /// <summary>
         /// Saves the space ship.
         /// </summary>
         /// <param name="spaceShip">The space ship.</param>
