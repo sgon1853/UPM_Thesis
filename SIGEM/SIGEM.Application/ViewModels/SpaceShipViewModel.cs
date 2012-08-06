@@ -93,7 +93,7 @@ namespace SIGEM.Windows.ViewModels
                                                     }
                                                     else
                                                     {
-                                                        MessageBox.Show("Debe rellenar todos los campos.");
+                                                        MessageBox.Show("Debe rellenar todos los campos, verifique nuevamente.");
                                                     }
                                                 }
                                                 catch (Exception exc)

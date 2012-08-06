@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SIGEM.Data.Interfaces
 {
@@ -17,6 +18,16 @@ namespace SIGEM.Data.Interfaces
         /// <param name="idSpaceShip">The id space ship.</param>
         /// <returns></returns>
         IEnumerable<Inspection> GetSpaceShipInspections(string idSpaceShip);
+
+        /// <summary>
+        /// Gets the space ship inspections by date.
+        /// </summary>
+        /// <param name="idSpaceShip">The id space ship.</param>
+        /// <param name="inspectionDate">The inspection date.</param>
+        /// <returns>
+        /// List of inspections
+        /// </returns>
+        IEnumerable<Inspection> GetSpaceShipInspectionsByDate(string idSpaceShip, DateTime inspectionDate);
 
         /// <summary>
         /// Gets the inspection details.

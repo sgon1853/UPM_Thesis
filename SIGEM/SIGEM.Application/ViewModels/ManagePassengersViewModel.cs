@@ -38,6 +38,7 @@ namespace SIGEM.Windows.ViewModels
             this.passengerDataRepository = passengerDataRepository;
             this.spaceShipOcupationDataRepository = spaceShipOcupationDataRepository;
             this.spaceShipDataRepository = spaceShipDataRepository;
+            this.spaceShipOcupations = this.spaceShipOcupationDataRepository.GetAllSpaceShipOcupations();
         }
 
         /// <summary>
@@ -218,6 +219,10 @@ namespace SIGEM.Windows.ViewModels
                                                         }
 
                                                     }
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("Debe rellenar todos los campos, verifique nuevamente.");
                                                 }
                                             }
                     );

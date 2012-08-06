@@ -44,5 +44,18 @@ namespace SIGEM.Windows.Helpers
                                 };
             window.Show();
         }
+
+        /// <summary>
+        /// Shows the view.
+        /// </summary>
+        /// <param name="viewControl">The view control.</param>
+        public static void ShowView(UserControl viewControl)
+        {
+            var window = new Window
+            {
+                Content = viewControl
+            };
+            window.Show();
+        }
     }
 }

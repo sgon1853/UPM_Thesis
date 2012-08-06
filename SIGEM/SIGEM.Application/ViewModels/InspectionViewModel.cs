@@ -6,6 +6,7 @@ using SIGEM.Windows.Base;
 using SIGEM.Windows.Commands;
 using System.Windows;
 using System.Linq;
+using SIGEM.Windows.Interfaces;
 
 namespace SIGEM.Windows.ViewModels
 {
@@ -14,10 +15,11 @@ namespace SIGEM.Windows.ViewModels
         private string idInspection;
         private string inspectorName;
         private string idSpaceShip;
-        private DateTime inspectionDate;
+        private string inspectionDate;
         private IEnumerable<InspectionDetail> inspectionDetails;
         private readonly ISpaceShipOcupationDataRepository spaceShipOccupationDataRepository;
         private readonly IInspectionDataRepository inspectionDataRepository;
+        private IInspectionHystoricCommand inspectionHystoricCommand;
         private bool showSpaceShipOccupationCanExecute;
         private bool saveSpaceShipInspectionCanExecute;
 
@@ -26,19 +28,22 @@ namespace SIGEM.Windows.ViewModels
         /// </summary>
         /// <param name="spaceShipOccupationDataRepository">The space ship occupation data repository.</param>
         /// <param name="inspectionDataRepository">The inspection data repository.</param>
+        /// <param name="inspectionHystoricCommand">The inspection hystoric command.</param>
         public InspectionViewModel(ISpaceShipOcupationDataRepository spaceShipOccupationDataRepository,
-            IInspectionDataRepository inspectionDataRepository)
+            IInspectionDataRepository inspectionDataRepository,
+            IInspectionHystoricCommand inspectionHystoricCommand)
         {
             this.spaceShipOccupationDataRepository = spaceShipOccupationDataRepository;
             this.inspectionDataRepository = inspectionDataRepository;
             showSpaceShipOccupationCanExecute = true;
             saveSpaceShipInspectionCanExecute = false;
+            this.inspectionHystoricCommand = inspectionHystoricCommand;
         }
 
         public string IdInspection { get { return idInspection; } set { idInspection = value; OnPropertyChanged("IdInspection"); } }
         public string InspectorName { get { return inspectorName; } set { inspectorName = value; OnPropertyChanged("InspectorName"); } }
         public string IdSpaceShip { get { return idSpaceShip; } set { idSpaceShip = value; OnPropertyChanged("IdSpaceShip"); } }
-        public DateTime InspectionDate { get { return inspectionDate; } set { inspectionDate = value; OnPropertyChanged("InspectionDate"); } }
+        public string InspectionDate { get { return inspectionDate; } set { inspectionDate = value; OnPropertyChanged("InspectionDate"); } }
         public IEnumerable<InspectionDetail> InspectionDetails { get { return inspectionDetails; } set { inspectionDetails = value; OnPropertyChanged("InspectionDetails"); } }
 
         /// <summary>
@@ -86,12 +91,24 @@ namespace SIGEM.Windows.ViewModels
                                                                               {
                                                                                   IdInspection = this.IdInspection,
                                                                                   IdSpaceShip = this.IdSpaceShip,
-                                                                                  InspectionDate = this.InspectionDate,
+                                                                                  InspectionDate = DateTime.Parse(this.InspectionDate),
                                                                                   InspectorName = this.InspectorName
                                                                               };
-                                                         this.inspectionDataRepository.SaveSpaceShipInspection(inspection, InspectionDetails);
-                                                         //TODO: show inspection hystoric.
-                                                         MessageBox.Show("Inspection hystoric.");
+                                                         var inspections =
+                                                             this.inspectionDataRepository.GetSpaceShipInspectionsByDate
+                                                                 (inspection.IdSpaceShip, inspection.InspectionDate);
+                                                         if (inspections.Any())
+                                                         {
+                                                             MessageBox.Show(
+                                                                 "La Aeronave solo puede ser revisada una vez por dia",
+                                                                 "Error guardando la revision");
+                                                         }
+                                                         else
+                                                         {
+                                                             this.inspectionDataRepository.SaveSpaceShipInspection(
+                                                                 inspection, InspectionDetails);
+                                                             ShowSpaceshipHystoric(this.IdSpaceShip);
+                                                         }
                                                      }
                                                      catch (Exception exc)
                                                      {
@@ -102,8 +119,21 @@ namespace SIGEM.Windows.ViewModels
                                                      saveSpaceShipInspectionCanExecute = false;
                                                      showSpaceShipOccupationCanExecute = true;
                                                  }
+                                                 else
+                                                 {
+                                                     MessageBox.Show("Debe rellenar todos los campos, verifique nuevamente.");
+                                                 }
                                              }, canexecute => saveSpaceShipInspectionCanExecute);
             }
+        }
+
+        /// <summary>
+        /// Shows the spaceship hystoric.
+        /// </summary>
+        /// <param name="spaceshipId">The spaceship id.</param>
+        private void ShowSpaceshipHystoric(string spaceshipId)
+        {
+            inspectionHystoricCommand.ShowInspectionHystoricBySpaceshipId(spaceshipId);
         }
 
         /// <summary>
@@ -115,7 +145,7 @@ namespace SIGEM.Windows.ViewModels
         protected override bool ArefieldsValid()
         {
             if (string.IsNullOrEmpty(this.IdInspection) || string.IsNullOrEmpty(this.IdSpaceShip)
-                || string.IsNullOrEmpty(this.InspectorName) || this.InspectionDate == DateTime.MinValue)
+                || string.IsNullOrEmpty(this.InspectorName) || string.IsNullOrEmpty(this.InspectionDate))
             {
                 return false;
             }

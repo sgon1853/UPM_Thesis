@@ -85,7 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\InspectionHystoric.xaml">
+    <Page Include="Views\InspectionHystoricView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,10 +120,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\ViewModelBase.cs" />
+    <Compile Include="Commands\InspectionHystoricCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Configure\Bootsrapper.cs" />
     <Compile Include="Helpers\UnityHelper.cs" />
     <Compile Include="Helpers\UserControlHelper.cs" />
+    <Compile Include="Interfaces\IInspectionHystoricCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -137,14 +139,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\InspectionHystoricViewModel.cs" />
     <Compile Include="ViewModels\InspectionViewModel.cs" />
     <Compile Include="ViewModels\ManagePassengersViewModel.cs" />
     <Compile Include="ViewModels\PassengerViewModel.cs" />
     <Compile Include="ViewModels\SpaceShipViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SupplySpaceShipViewModel.cs" />
-    <Compile Include="Views\InspectionHystoric.xaml.cs">
-      <DependentUpon>InspectionHystoric.xaml</DependentUpon>
+    <Compile Include="Views\InspectionHystoricView.xaml.cs">
+      <DependentUpon>InspectionHystoricView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InspectionView.xaml.cs">
       <DependentUpon>InspectionView.xaml</DependentUpon>

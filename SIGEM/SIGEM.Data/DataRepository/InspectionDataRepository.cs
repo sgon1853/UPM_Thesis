@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Transactions;
 using SIGEM.Data.Interfaces;
+using System;
 
 namespace SIGEM.Data.DataRepository
 {
@@ -32,11 +33,29 @@ namespace SIGEM.Data.DataRepository
         /// Gets the space ship inspections.
         /// </summary>
         /// <param name="idSpaceShip">The id space ship.</param>
-        /// <returns></returns>
+        /// <returns>List of inspections</returns>
         public IEnumerable<Inspection> GetSpaceShipInspections(string idSpaceShip)
         {
             var inspections = from insps in DataContext.Inspections
                               where insps.IdSpaceShip == idSpaceShip
+                              select insps;
+
+            return inspections;
+        }
+
+        /// <summary>
+        /// Gets the space ship inspections by date.
+        /// </summary>
+        /// <param name="idSpaceShip">The id space ship.</param>
+        /// <param name="inspectionDate">The inspection date.</param>
+        /// <returns>
+        /// List of inspections
+        /// </returns>
+        public IEnumerable<Inspection> GetSpaceShipInspectionsByDate(string idSpaceShip, DateTime inspectionDate)
+        {
+            var inspections = from insps in DataContext.Inspections
+                              where insps.IdSpaceShip == idSpaceShip &&
+                              insps.InspectionDate.Date == inspectionDate.Date
                               select insps;
 
             return inspections;
