@@ -19,7 +19,7 @@ namespace SIGEM.Windows.ViewModels
         private IEnumerable<InspectionDetail> inspectionDetails;
         private readonly ISpaceShipOcupationDataRepository spaceShipOccupationDataRepository;
         private readonly IInspectionDataRepository inspectionDataRepository;
-        private IInspectionHystoricCommand inspectionHystoricCommand;
+        private readonly IInspectionHystoricCommand inspectionHystoricCommand;
         private bool showSpaceShipOccupationCanExecute;
         private bool saveSpaceShipInspectionCanExecute;
 
