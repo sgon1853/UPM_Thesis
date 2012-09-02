@@ -1,7 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIGRE.Data", "SIGRE.Data\SIGRE.Data.csproj", "{6C0E650D-B515-4EA9-A075-5BAF7E46E8E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIGRE.Client", "SIGRE.Client\SIGRE.Client.csproj", "{7999FD7B-6ED8-4B3C-A579-0ABC8677B5DE}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C0E650D-B515-4EA9-A075-5BAF7E46E8E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C0E650D-B515-4EA9-A075-5BAF7E46E8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C0E650D-B515-4EA9-A075-5BAF7E46E8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C0E650D-B515-4EA9-A075-5BAF7E46E8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7999FD7B-6ED8-4B3C-A579-0ABC8677B5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7999FD7B-6ED8-4B3C-A579-0ABC8677B5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7999FD7B-6ED8-4B3C-A579-0ABC8677B5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7999FD7B-6ED8-4B3C-A579-0ABC8677B5DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
